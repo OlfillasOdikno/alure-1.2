@@ -72,13 +72,12 @@ if [ "$docker" = true ]; then
         continue
       fi
       if [ "$ci" = true ]; then
-        docker run --rm -tv jenkins_home:/var/jenkins_home -w "$(pwd)" debian-rvgl:${archs[$i]} ./build.sh "--${archs[$i]}"
+        docker run --rm -tv jenkins_home:/var/jenkins_home -w "$(pwd)" glad-builder:${archs[$i]} ./build.sh "--${archs[$i]}"
       else
         docker run --rm -tv "$(pwd)":/work -w /work alure-builder:${archs[$i]} ./build.sh "--${archs[$i]}"
       fi
     done
   fi
-
   exit
 fi
 
